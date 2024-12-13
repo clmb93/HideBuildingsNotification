@@ -19,9 +19,7 @@ namespace HideBuildingsNotification
         protected override void OnCreate()
         {
             base.OnCreate();
-            m_Query = GetEntityQuery(
-                ComponentType.ReadOnly<NotificationIconDisplayData>());
-               
+            m_Query = GetEntityQuery(ComponentType.ReadOnly<NotificationIconDisplayData>());
             RequireForUpdate(m_Query);
         }
 
@@ -63,7 +61,29 @@ namespace HideBuildingsNotification
                     }
                 }
             }
+            m_EntityList.Dispose(); //Release the memory
+        }
 
+        protected override void OnDestroy()
+        {
+            m_Query = GetEntityQuery(ComponentType.ReadOnly<NotificationIconDisplayData>());
+            NativeArray<Entity> m_EntityList = m_Query.ToEntityArray(Allocator.Persistent);
+            for (int i = 0; i < m_EntityList.Length; i++)
+            {
+                var entity = m_EntityList[i];
+                if (EntityManager.HasComponent<NotificationIconDataDefault>(entity))
+                {
+                    var component = EntityManager.GetComponentData<NotificationIconDisplayData>(entity);
+                    var defaultComponent = EntityManager.GetComponentData<NotificationIconDataDefault>(entity);
+                    component.m_MinParams = defaultComponent.m_MinParams;
+                    component.m_MaxParams = defaultComponent.m_MaxParams;
+                    EntityManager.SetComponentData(entity, component);
+                    EntityManager.RemoveComponent<NotificationIconDataDefault>(entity);
+                }
+            }            
+            m_EntityList.Dispose(); //Release the memory
+            log.Info("Reset all building notifications to default values before quiting");
+            base.OnDestroy();
         }
 
         private struct NotificationIconDataDefault : IComponentData
