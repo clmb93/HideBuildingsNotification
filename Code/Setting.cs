@@ -22,7 +22,7 @@ namespace HideBuildingNotification
         [SettingsUISection(kSection, kToggleGroup)]
         public string version
         {
-            get => "0.1.0";
+            get => "1.0.0";
         }
 
         public override void SetDefaults()
