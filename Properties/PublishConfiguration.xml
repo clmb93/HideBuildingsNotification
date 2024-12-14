@@ -13,6 +13,7 @@
 	</LongDescription>
 	<!--Thumbnail-->
 	<Thumbnail Value="Properties/Thumbnail.png" />
+	<Screenshot Value="Properties/Screen/screen0.png" />
 	<Screenshot Value="Properties/Screen/screen1.png" />
 	<Screenshot Value="Properties/Screen/screen2.png" />
 	<Screenshot Value="Properties/Screen/screen3.png" />
