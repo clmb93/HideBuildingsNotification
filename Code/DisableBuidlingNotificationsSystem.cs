@@ -1,5 +1,9 @@
 ﻿
+using System;
+using System.Collections.Generic;
 using System.ComponentModel;
+using Colossal.Entities;
+using Colossal.Json;
 using Colossal.Logging;
 using Game;
 using Game.Prefabs;
@@ -19,18 +23,37 @@ namespace HideBuildingsNotification
         protected override void OnCreate()
         {
             base.OnCreate();
-            m_Query = GetEntityQuery(ComponentType.ReadOnly<NotificationIconDisplayData>());
+            m_Query = GetEntityQuery(
+                ComponentType.ReadOnly<NotificationIconDisplayData>(),
+                ComponentType.ReadOnly<NotificationIconData>()
+                );
             RequireForUpdate(m_Query);
         }
 
         protected override void OnUpdate()
         {
             NativeArray<Entity> m_EntityList = m_Query.ToEntityArray(Allocator.Persistent);
+            List<String> iconToKeep = new List<String>
+            {
+                "Bus Stop",
+                "Taxi Stand",
+                "Train Stop",
+                "Tram Stop",
+                "Subway Stop",
+                "Ship Stop",
+                "Airplane Stop",
+                "Mail Box",
+                "Cargo Train Stop",
+                "Cargo Ship Stop",
+                "Cargo Airplane Stop"
+            };
+
             var m_hideBuildingNotification = Mod.GetHideBuildingNotifications();
             for (int i = 0; i < m_EntityList.Length; i++)
             {
                 var entity = m_EntityList[i];
-                if (m_hideBuildingNotification)
+                var prefabName = base.World.GetOrCreateSystemManaged<PrefabSystem>().GetPrefabName(entity);
+                if (m_hideBuildingNotification && !iconToKeep.Contains(prefabName))
                 {
 
                     if (
@@ -93,3 +116,153 @@ namespace HideBuildingsNotification
         }
     }
 }
+
+/*
+List prefab names:
+    "Battery Empty",
+    "No Hospital Supplies",
+    "No Emergency Shelter Supplies",
+    "Condemned",
+    "Rent Too High",
+    "Pipeline Not Connected - Sewage",
+    "Water Not Enough Production Notification",
+    "Sewage Not Enough Production Notification",
+    "Not Enough Groundwater Notification",
+    "Not Enough Surface Water Notification",
+    "Dirty Water Pump Notification",
+    "Powerline Not Connected - Low",
+    "Electricity Building Bottleneck Notification",
+    "Electricity Not Enough Production Notification",
+    "Electricity Transformer Out of Capacity",
+    "Electricity Not Enough Connected Notification",
+    "No Watercraft Access",
+    "MissingUneducatedWorkers",
+    "MissingEducatedWorkers",
+    "No Inputs",
+    "No Customers",
+    "No Outside Connection",
+    "Building Level Up",
+    "Selected",
+    "Followed",
+    "Happy Face",
+    "Sad Face",
+    "ValentineHeart",
+    "Road Outside Connection",
+    "Train Outside Connection",
+    "Ship Outside Connection",
+    "Airplane Outside Connection",
+    "Electricity Outside Connection",
+    "Water Pipe Outside Connection",
+    "Creature Spawner",
+    "Passenger Transport",
+    "Cargo Transport",
+    "Taxi",
+    "Ambulance",
+    "Fire Engine",
+    "Garbage Truck",
+    "Hearse",
+    "Park Maintenance Vehicle",
+    "Police Car",
+    "Post Van",
+    "Prisoner Transport",
+    "Road Maintenance Vehicle",
+    "Evacuating Transport",
+    "Admin Building",
+    "Deathcare Facility",
+    "Disaster Facility",
+    "Emergency Shelter",
+    "Fire Station",
+    "Firewatch Tower",
+    "Fresh Water Building",
+    "Garbage Facility",
+    "Hospital",
+    "Park Maintenance Depot",
+    "Park",
+    "Parking Facility",
+    "Police Station",
+    "Post Facility",
+    "Power Plant",
+    "Prison",
+    "Research Facility",
+    "Road Maintenance Depot",
+    "School",
+    "Sewage Building",
+    "Telecom Facility",
+    "Transformer",
+    "Transport Depot",
+    "Transport Station",
+    "Welfare Office",
+    "Signature Residential",
+    "Signature Commercial",
+    "Signature Industrial",
+    "Signature Office",
+    "Extractor Building",
+    "Bus Stop",
+    "Taxi Stand",
+    "Train Stop",
+    "Tram Stop",
+    "Subway Stop",
+    "Ship Stop",
+    "Airplane Stop",
+    "Mail Box",
+    "Cargo Train Stop",
+    "Cargo Ship Stop",
+    "Cargo Airplane Stop",
+    "Already Exists",
+    "Already Upgraded",
+    "Exceeds City Limits",
+    "Fire Notification",
+    "In Water",
+    "Invalid Shape",
+    "Long Distance",
+    "Low Elevation",
+    "No Car Access",
+    "No Cargo Access",
+    "No Pedestrian Access",
+    "No Road Access",
+    "No Track Access",
+    "No Water",
+    "Not Enough Money",
+    "Not On Shoreline",
+    "Overlap Existing",
+    "Pathfind Failed",
+    "Short Distance",
+    "Small Area",
+    "Tight Curve",
+    "Steep Slope",
+    "Exceeds Lot Limits",
+    "Not On Border",
+    "No Train Access",
+    "No Groundwater",
+    "Abandoned Collapsed",
+    "Abandoned",
+    "Ambulance Notification",
+    "Burned Down",
+    "Crime Scene",
+    "Destroyed",
+    "Dirty Water",
+    "Electricity Notification",
+    "Facility Full",
+    "Garbage Notification",
+    "Hearse Notification",
+    "No Fuel Notification",
+    "Pipeline Not Connected",
+    "Powerline Not Connected",
+    "Sewage Notification",
+    "Track Not Connected",
+    "Traffic Accident",
+    "Water Damage",
+    "Water Destroyed",
+    "Water Notification",
+    "Weather Damage",
+    "Weather Destroyed",
+    "Electricity Bottleneck Notification",
+    "Traffic Bottleneck Notification",
+    "Turned Off",
+    "Dead End",
+    "No Vehicles",
+    "Air Pollution",
+    "Noise Pollution",
+    "Ground Pollution"
+];
+ */
