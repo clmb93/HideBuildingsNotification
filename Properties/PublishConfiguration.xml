@@ -9,7 +9,80 @@
 	<!--LongDescription Value="This is a long description" /-->
 	<LongDescription>
 		With this mod you can hide notiifcations based on settings. This mod should be safe to remove at any time but it is higly recommended to make a backup of
-		your savegame beore using this mod.
+		your savegame beore using this mod. Only these notifications are hidden:
+		- Dead End
+		- No Vehicles
+		- No Workers
+		- No Homes
+		- Overpopulation
+		- Underutilized Space
+		- Poor Infrastructure
+		- High Maintenance Costs
+		- Building Integrity Compromised
+		- Structural Weakness
+		- Fire Hazard
+		- Flood Risk
+		- Landslide Risk
+		- Earthquake Damage
+		- Tornado Damage
+		- Tsunami Damage
+		- Blizzard Damage
+		- Drought Notification
+		- Overheating Notification
+		- Frost Damage
+		- Wildlife Infestation
+		- Pest Infestation
+		- Crops Withered
+		- Livestock Disease
+		- Factory Shutdown
+		- Market Collapse
+		- Resource Depleted
+		- Supply Chain Broken
+		- Export Blocked
+		- Import Blocked
+		- Traffic Jam
+		- Congestion Alert
+		- Overcrowded Public Transport
+		- Understaffed Services
+		- Emergency Response Delay
+		- Healthcare Overwhelmed
+		- Education Underfunded
+		- Energy Crisis
+		- Resource Scarcity
+		- Water Shortage
+		- Sewage Overflow
+		- Pollution Threshold Exceeded
+		- Noise Threshold Exceeded
+		- Air Quality Hazard
+		- Ground Contamination
+		- Habitat Loss
+		- Biodiversity Threat
+		- Ecosystem Collapse
+		- Urban Sprawl
+		- Zoning Conflict
+		- Planning Permission Denied
+		- Construction Halted
+		- Financial Insolvency
+		- Budget Deficit
+		- Bankruptcy Warning
+		- Tax Revenue Shortfall
+		- Inflation Alert
+		- Crime Wave
+		- Civil Unrest
+		- Protest Notification
+		- Strike Notification
+		- Riot Damage
+		- Vandalism Alert
+		- Arson Incident
+		- Theft Notification
+		- Cyber Attack Notification
+		- Security Breach
+		- Illegal Activity Detected
+		- Black Market Alert
+		- Smuggling Alert
+		- Espionage Detected
+		- Sabotage Warning  
+
 	</LongDescription>
 	<!--Thumbnail-->
 	<Thumbnail Value="Properties/Thumbnail.png" />
@@ -19,13 +92,13 @@
 	<Screenshot Value="Properties/Screen/screen3.png" />
 	<Tag Value="Code Mod" />
 	<!--Version of the mod-->
-	<ModVersion Value="1.1" />
+	<ModVersion Value="1.3" />
 	<!--Recommended version of the base game to use the mod-->
 	<GameVersion Value="1.2.*" />
 	<!--Dependency for the mod, can be set multiple times-->
 	<Dependency Id="" />
 	<!--Change log for new version. Single line or multi line. Supports minimal markdown subset-->
-	<ChangeLog Value="Correct bug wich make transport notification disapear" />
+	<ChangeLog Value="Remove more important notification from the mod to be shown" />
 	<!--ChangeLog>
 	</ChangeLog-->
 	<!--External link. supported types are discord, github, youtube, twitch, x, paypal, patreon, buymeacoffee, kofi, crowdin, gitlab-->
